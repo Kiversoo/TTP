@@ -49,6 +49,9 @@ app.MapDelete("/delete-note/{id}", async (AppDbContext db, int id) =>
 
 app.MapGet("/", () => "Сервер заметок запущен и готов к работе!");
 
+app.UseDefaultFiles(); // Чтобы сервер искал index.html сам
+app.UseStaticFiles();  // Чтобы сервер разрешил выдавать файлы из wwwroot
+
 app.Run();
 
 // КЛАССЫ (Обязательно в самом низу!)
