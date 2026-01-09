@@ -35,6 +35,20 @@ app.MapPost("/add-note", async (AppDbContext db, Note note) => {
     return Results.Ok(new { message = "Заметка в базе!" });
 });
 
+app.MapDelete("/delete-note/{id}", async (AppDbContext db, int id) =>
+{
+    var note = await db.Notes.FindAsync(id);
+    if (note == null) return Results.NotFound();
+
+    db.Notes.Remove(note);
+    await db.SaveChangesAsync();
+    return Results.Ok(new {messege = "Заметка удалена"});
+});
+
+
+
+app.MapGet("/", () => "Сервер заметок запущен и готов к работе!");
+
 app.Run();
 
 // КЛАССЫ (Обязательно в самом низу!)
