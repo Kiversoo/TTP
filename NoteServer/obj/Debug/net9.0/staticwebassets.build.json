@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "AfSIaZ2lDnmlKC60DJizwad4FE+FCVdE4nqEEbgjAsE=",
+  "Source": "NoteServer",
+  "BasePath": "_content/NoteServer",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
