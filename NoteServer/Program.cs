@@ -1,34 +1,49 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Настраиваем базу данных
+builder.Services.AddDbContext<AppDbContext>(options => 
+    options.UseSqlite("Data Source=notes.db"));
+
+// Настраиваем доступ для фронтенда
+builder.Services.AddCors(options => {
+    options.AddDefaultPolicy(p => p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+});
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-
-app.UseHttpsRedirection();
-
-var summaries = new[]
+// Создаем базу при старте
+using (var scope = app.Services.CreateScope())
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.EnsureCreated();
+}
 
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
+app.UseCors();
+
+// ПУТИ (Эндпоинты)
+app.MapGet("/notes", async (AppDbContext db) => await db.Notes.ToListAsync());
+
+app.MapPost("/add-note", async (AppDbContext db, Note note) => {
+    db.Notes.Add(note);
+    await db.SaveChangesAsync();
+    return Results.Ok(new { message = "Заметка в базе!" });
 });
 
 app.Run();
 
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+// КЛАССЫ (Обязательно в самом низу!)
+public class Note {
+    public int Id { get; set; }
+    public string Text { get; set; } = "";
+}
+
+public class AppDbContext : DbContext {
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+    public DbSet<Note> Notes => Set<Note>();
 }
