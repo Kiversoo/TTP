@@ -1,0 +1,88 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden; /* Это уберет горизонтальную полосу прокрутки, если она появится */
+}
+
+.container { 
+    max-width: 95%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column; 
+    gap: 20px; 
+    padding: 20px; 
+    font-family: sans-serif; 
+}
+.button-row { 
+    display: flex; 
+    gap: 15px; 
+    justify-content: space-between; 
+}
+
+/* Карточки 3 */
+.card { 
+    border: 2px solid #ccc; 
+    border-radius: 40px; 
+    padding: 120px 150px; 
+    flex: 1; 
+    text-align: center; 
+    cursor: pointer; 
+    background: #f9f9f9; 
+    transition: 0.3s; 
+}
+.card:hover { 
+    background: #e0e0e0; 
+    transform: translateY(-5px); 
+}
+
+.main-content { 
+    display: flex; 
+    gap: 20px; 
+    height: 600px; 
+}
+.bottle-container { 
+    flex: 0 0 300px; 
+    border: 1px solid #333; 
+    padding: 10px; 
+    border-radius: 10px; 
+}
+/* блок информации */
+.info-display { 
+    flex: 0 0 80%; 
+    border: 1px solid #333; 
+    padding: 10px; 
+    border-radius: 10px; 
+}
+/* Эффект колбы */
+.bottle { 
+    width: 140px; 
+    height: 300px; 
+    border: 2px solid #333; 
+    border-radius: 0 0 20px 20px; 
+    position: relative; 
+    overflow: hidden; 
+    margin: 30px auto; 
+}
+.liquid { 
+    position: absolute; 
+    bottom: 0; 
+    width: 100%; 
+    background: #3498db; 
+    transition: height 0.5s; 
+    height: 0%; 
+}
+
+.header-info {
+    border: none; 
+    border-bottom: 2px solid #333;
+    border-radius: 10; 
+    padding: 15px 26px;
+    text-align: center; 
+    background: #f9f9f9; 
+    width: 100%; 
+    margin: 0; 
+}

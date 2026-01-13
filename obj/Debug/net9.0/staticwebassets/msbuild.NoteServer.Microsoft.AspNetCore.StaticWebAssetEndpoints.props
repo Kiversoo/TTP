@@ -1,0 +1,28 @@
+﻿<Project>
+  <ItemGroup>
+    <StaticWebAssetEndpoint Include="_content/NoteServer/index.html">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\index.html'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-EAlzAPmRwXqWeej2BQYW\u002BfHziLVnVtIM\u002BGtEwUyRALU="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"2109"},{"Name":"Content-Type","Value":"text/html"},{"Name":"ETag","Value":"\u0022EAlzAPmRwXqWeej2BQYW\u002BfHziLVnVtIM\u002BGtEwUyRALU=\u0022"},{"Name":"Last-Modified","Value":"Tue, 13 Jan 2026 15:49:10 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/NoteServer/index.st4yy2sxky.html">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\index.html'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"st4yy2sxky"},{"Name":"integrity","Value":"sha256-EAlzAPmRwXqWeej2BQYW\u002BfHziLVnVtIM\u002BGtEwUyRALU="},{"Name":"label","Value":"_content/NoteServer/index.html"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"2109"},{"Name":"Content-Type","Value":"text/html"},{"Name":"ETag","Value":"\u0022EAlzAPmRwXqWeej2BQYW\u002BfHziLVnVtIM\u002BGtEwUyRALU=\u0022"},{"Name":"Last-Modified","Value":"Tue, 13 Jan 2026 15:49:10 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/NoteServer/style.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\style.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-8KN9RKduRhhKMkhn3B1l4/cV6Xs6X1bGcRd8KQBc400="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1787"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u00228KN9RKduRhhKMkhn3B1l4/cV6Xs6X1bGcRd8KQBc400=\u0022"},{"Name":"Last-Modified","Value":"Tue, 13 Jan 2026 15:51:09 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/NoteServer/style.oemii0ddi9.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\style.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"oemii0ddi9"},{"Name":"integrity","Value":"sha256-8KN9RKduRhhKMkhn3B1l4/cV6Xs6X1bGcRd8KQBc400="},{"Name":"label","Value":"_content/NoteServer/style.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1787"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u00228KN9RKduRhhKMkhn3B1l4/cV6Xs6X1bGcRd8KQBc400=\u0022"},{"Name":"Last-Modified","Value":"Tue, 13 Jan 2026 15:51:09 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+  </ItemGroup>
+</Project>
