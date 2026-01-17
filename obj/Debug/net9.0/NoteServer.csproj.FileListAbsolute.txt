@@ -142,5 +142,9 @@ C:\Users\Мы\Documents\TTP\NoteServer\obj\Debug\net9.0\NoteServer.pdb
 C:\Users\Мы\Documents\TTP\NoteServer\obj\Debug\net9.0\NoteServer.genruntimeconfig.cache
 C:\Users\Мы\Documents\TTP\NoteServer\obj\Debug\net9.0\ref\NoteServer.dll
 C:\Users\Мы\Documents\TTP\NoteServer\bin\Debug\net9.0\NoteServer.staticwebassets.runtime.json
-C:\Users\Мы\Documents\TTP\NoteServer\obj\Debug\net9.0\compressed\2vb415zo1d-st4yy2sxky.gz
-C:\Users\Мы\Documents\TTP\NoteServer\obj\Debug\net9.0\compressed\z0sinwlj0f-oemii0ddi9.gz
+C:\Users\Мы\Documents\TTP\NoteServer\obj\Debug\net9.0\compressed\yneawdv8j0-bdwfkygsz7.gz
+C:\Users\Мы\Documents\TTP\NoteServer\obj\Debug\net9.0\compressed\2vb415zo1d-oay6vjrvdt.gz
+C:\Users\Мы\Documents\TTP\NoteServer\obj\Debug\net9.0\compressed\o15lnf6m9r-q2z0k36bgb.gz
+C:\Users\Мы\Documents\TTP\NoteServer\obj\Debug\net9.0\compressed\npo8p5qd8b-4qpde0qydg.gz
+C:\Users\Мы\Documents\TTP\NoteServer\obj\Debug\net9.0\compressed\g5ck0f5gcn-9t5bnchh4g.gz
+C:\Users\Мы\Documents\TTP\NoteServer\obj\Debug\net9.0\compressed\z0sinwlj0f-5zqwqbvkid.gz
