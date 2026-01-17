@@ -142,8 +142,6 @@ C:\Users\Мы\Documents\TTP\NoteServer\obj\Debug\net9.0\NoteServer.pdb
 C:\Users\Мы\Documents\TTP\NoteServer\obj\Debug\net9.0\NoteServer.genruntimeconfig.cache
 C:\Users\Мы\Documents\TTP\NoteServer\obj\Debug\net9.0\ref\NoteServer.dll
 C:\Users\Мы\Documents\TTP\NoteServer\bin\Debug\net9.0\NoteServer.staticwebassets.runtime.json
-C:\Users\Мы\Documents\TTP\NoteServer\obj\Debug\net9.0\compressed\2vb415zo1d-st4yy2sxky.gz
-C:\Users\Мы\Documents\TTP\NoteServer\obj\Debug\net9.0\compressed\z0sinwlj0f-oemii0ddi9.gz
 C:\Users\home\OneDrive\Рабочий стол\one\TTP\bin\Debug\net9.0\appsettings.Development.json
 C:\Users\home\OneDrive\Рабочий стол\one\TTP\bin\Debug\net9.0\appsettings.json
 C:\Users\home\OneDrive\Рабочий стол\one\TTP\bin\Debug\net9.0\NoteServer.staticwebassets.runtime.json
@@ -292,3 +290,9 @@ C:\Users\home\OneDrive\Рабочий стол\one\TTP\obj\Debug\net9.0\NoteServ
 C:\Users\home\OneDrive\Рабочий стол\one\TTP\obj\Debug\net9.0\ref\NoteServer.dll
 C:\Users\home\OneDrive\Рабочий стол\one\TTP\obj\Debug\net9.0\compressed\npo8p5qd8b-p5rlykvy27.gz
 C:\Users\home\OneDrive\Рабочий стол\one\TTP\obj\Debug\net9.0\compressed\z0sinwlj0f-zovg3gahul.gz
+C:\Users\Мы\Documents\TTP\NoteServer\obj\Debug\net9.0\compressed\yneawdv8j0-bdwfkygsz7.gz
+C:\Users\Мы\Documents\TTP\NoteServer\obj\Debug\net9.0\compressed\2vb415zo1d-oay6vjrvdt.gz
+C:\Users\Мы\Documents\TTP\NoteServer\obj\Debug\net9.0\compressed\o15lnf6m9r-q2z0k36bgb.gz
+C:\Users\Мы\Documents\TTP\NoteServer\obj\Debug\net9.0\compressed\z0sinwlj0f-7heqtua5au.gz
+C:\Users\Мы\Documents\TTP\NoteServer\obj\Debug\net9.0\compressed\g5ck0f5gcn-i52smzfv5i.gz
+C:\Users\Мы\Documents\TTP\NoteServer\obj\Debug\net9.0\compressed\npo8p5qd8b-jwgqqohtbq.gz
