@@ -11,20 +11,32 @@
         Работа / Навигация
     </div>
 
-    <div class="work-page-layout">
-        <aside class="sidebar">
-            <div id="krugcontainer">
-              <div class="icon-wrapper">
-                  <button class="delete-btn">✖</button>
-            </div>
+    <div id="topWidget" class="sliding-widget">
+        <div class="widget-inner">
+            <h3>Панель управления</h3>
+            <p>Здесь будут твои функции или настройки.</p>
+            <button>Ок</button>
         </div>
-        <button id ="add-krug-btn" class ="add-btn">✚</button>
-    </aside>
+    
+        <button id="toggleBtn" class="widget-trigger-button">
+           <span>▼</span>
+        </button>
+    </div> 
 
+    <div class="work-page-layout">
+    <aside class="sidebar">
+        <div class="circle-icon"></div>
+        <div class="circle-icon"></div>
+        </aside>
     <main class="content-area">
         <h1>Тут будет работа</h1>
     </main>
 </div>
-    <script src="script.js"></script>
+
+        <main class="content-area">
+            <h1>Здесь будут рабочие функции</h1>
+        </main>
+    </div>
+
 </body>
 </html>
