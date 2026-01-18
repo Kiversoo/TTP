@@ -24,14 +24,25 @@
     </div> 
 
     <div class="work-page-layout">
-    <aside class="sidebar">
-        <div class="circle-icon"></div>
-        <div class="circle-icon"></div>
+        <aside class="sidebar">
+            <div class="circle-icon"></div>
+            <div class="circle-icon"></div>
         </aside>
-    <main class="content-area">
-        <h1>Тут будет работа</h1>
-    </main>
-</div>
+        <main class="content-area">
+            <h1>Тут будет работа</h1>
+            <p>Здесь будут рабочие функции.</p>
+        </main>
+    </div>
+
+    <script>
+        const btn = document.getElementById('toggleBtn');
+        const widget = document.getElementById('topWidget');
+
+        btn.onclick = function() {
+        widget.classList.toggle('active');
+        };
+    </script>
+</body>
 
         <main class="content-area">
             <h1>Здесь будут рабочие функции</h1>

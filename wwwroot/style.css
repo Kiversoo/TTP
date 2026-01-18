@@ -137,3 +137,86 @@ body {
     flex: 1;
     padding: 30px;
 }
+
+
+/* ВИДЖЕТ */
+.sliding-widget {
+    position: absolute;
+    top: 60px; /* Высота шапки */
+    left: 80px;
+    width: calc(100% - 80px); /* Ширина экрана минус ширина сайдбара */
+    background: #f1f1f1; /* Убрал красный, поставил нормальный серый */
+    border-bottom: 2px solid #000; /* Цвет линии как у шапки */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+
+    /* Состояние "Спрятан" */
+    transform: translateY(-100%);
+    transition: transform 0.4s ease-out;
+    z-index: 500;
+    min-height: 150px;
+    display: block;
+}
+
+/* Когда виджет открыт */
+.sliding-widget.active {
+    transform: translateY(0);
+}
+
+.widget-inner {
+    padding: 20px;
+    color: #333;
+}
+
+/* КНОПКА-ЯЗЫЧОК (Стиль для твоей кнопки под линией) */
+.widget-trigger-button {
+    position: absolute;
+    right: 50px;  /* Отступ справа, как ты просил */
+    bottom: -32px;  /* Выносим кнопку НИЖЕ линии виджета */
+    width: 120px;  /* Сделал чуть шире для текста */
+    height: 30px;
+    background: #f1f1f1;
+    border: 2px solid #000;
+    border-top: none; /* Чтобы кнопка визуально росла из линии */
+    border-radius:0 0 10px 10px;
+    cursor: pointer;
+    z-index: 1001;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.widget-trigger-button:hover {
+    background: #e0e0e0;
+}
+
+/* Остальные твои стили */
+.work-page-layout {
+    display: flex;
+    z-index: 1;
+}
+.sliding-widget {
+    /* ... твои стили ... */
+    background: burlywood !important; /* Временно, чтобы увидеть */
+    min-height: 100px;         /* Принудительная высота */
+}
+
+/* Базовый стиль для иконки/текста внутри кнопки */
+.widget-trigger-button span {
+    display: inline-block;
+    transition: transform 0.3s ease; /* Плавный поворот */
+}
+
+/* Когда виджет активен, поворачиваем стрелку на 180 градусов */
+.sliding-widget.active .widget-trigger-button span {
+    transform: rotate(180deg);
+}
+
+.widget-trigger-button {
+    opacity: 0.7;
+    transition: opacity 0.3s, background 0.2s;
+}
+
+.widget-trigger-button:hover {
+    opacity: 1;
+    background: #e0e0e0;
+}
