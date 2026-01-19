@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>C# Notes App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="header-info">Навигация</div>
+
+<div class="container">
+    <div class="button-row">
+        <a href="work.html" style="text-decoration: none; color: inherit;">
+    <div class="card">
+        Работа
+    </div>
+</a>
+    <a href="home.html" style="text-decoration: none; color: inherit;">
+    <div class="card">
+        Дом
+    </div>
+</a>
+    <a href="school.html" style="text-decoration: none; color: inherit;">
+    <div class="card">
+        Учеба
+    </div>
+</a>
+    </div>
+
+    <div class="main-content">
+        <div class="bottle-container">
+            <h3>Задачи по важности</h3>
+            <div id="bottle" class="bottle">
+                <div id="liquid" class="liquid"></div>
+            </div>
+            <ul id="notesList"></ul> </div>
+
+        <div class="info-display">
+            <h3>Детальная информация</h3>
+        </div>
+    </div>
+</div>
+    <ul id="notesList"></ul>
+    <script>
+
+    // Запускаем при открытии страницы
+    loadNotes();
+
+    // Логика нажатия на кнопку
+    btn.onclick = async () => {
+        const textValue = input.value;
+        if (!textValue) return alert("Введите текст!");
+
+        try {
+            const response = await fetch('http://localhost:5254/notes', { 
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ Text: textValue }) 
+            });
+
+            if (response.ok) {
+                input.value = ""; // Очищаем поле ввода
+                
+                // ВОТ ОНО: Вместо alert просто обновляем список
+                await loadNotes(); 
+            } else {
+                alert("Ошибка сервера: " + response.status);
+            }
+        } catch (error) {
+            alert("Ошибка связи с сервером");
+        }
+    };
+</script>
+</body>
+</html>

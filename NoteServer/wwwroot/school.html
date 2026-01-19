@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Учеба</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="header-info work-page">
+        Учеба / Навигация
+    </div>
+
+
+<!--Выездная панель-->
+    <div id="topWidget" class="sliding-widget">
+        <div class="widget-inner">
+            <h3>Панель управления</h3>
+            <p>Здесь будут твои функции или настройки.</p>
+            <button>Ок</button>
+        </div>
+    
+        <button id="toggleBtn" class="widget-trigger-button">
+           <span>▼</span>
+        </button>
+    </div> 
+
+
+<!--Кружки-->
+    <div class="work-page-layout">
+        <aside class="sidebar">
+            <div id="krugcontainer"></div>
+            <button id="add-krug-btn" class="add-btn">+</button>
+        </aside>
+        <main class="content-area">
+            <h1>Тут будет работа</h1>
+            <p>Здесь будут рабочие функции.</p>
+        </main>
+    </div>
+
+    
+<!--Скрипт для виджета-->
+<script>
+        const btn = document.getElementById('toggleBtn');
+        const widget = document.getElementById('topWidget');
+
+        btn.onclick = function() {
+        widget.classList.toggle('active');
+        };
+    </script>
+</body>
+
+<script src="script.js"></script>
+
+</body>
+</html>
