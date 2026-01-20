@@ -11,6 +11,7 @@
         Работа / Навигация
     </div>
 
+<!--Выездная панель-->
     <div id="topWidget" class="sliding-widget">
         <div class="widget-inner">
             <h3>Панель управления</h3>
@@ -23,17 +24,23 @@
         </button>
     </div> 
 
+
+<!--Кружки + рисовалка-->
     <div class="work-page-layout">
         <aside class="sidebar">
             <div id="krugcontainer"></div>
             <button id="add-krug-btn" class="add-btn">+</button>
         </aside>
-        <main class="content-area">
-            <h1>Тут будет работа</h1>
-            <p>Здесь будут рабочие функции.</p>
+        <main id="workspace">
+            <div id="cikl-container">
+               <canvas id="holst" width="5000" height="5000"></canvas>
+               <div id="sloi-elements">
+            </div>
         </main>
     </div>
 
+
+<!--Скрипт для виджета-->
     <script>
         const btn = document.getElementById('toggleBtn');
         const widget = document.getElementById('topWidget');
