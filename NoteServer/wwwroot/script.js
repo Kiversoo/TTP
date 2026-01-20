@@ -5,125 +5,139 @@ document.addEventListener('DOMContentLoaded', () => {
     const ciklContainer = document.getElementById('cikl-container');
     const holst = document.getElementById('holst');
     const ctx = holst.getContext('2d');
+    const modal = document.getElementById('add-doska');
+    const titleInput = document.getElementById('note-title');
     
     let workspaceData = {}; 
     let currentId = null;
     let scale = 1;
     let isDrawing = false;
 
-    //--ОТРИСОВКА КРУЖКА--//
-        function renderCircle(id) {
-            if (!container) return; // Защита от ошибок
-            const wrapper = document.createElement('div');
-            wrapper.className = 'circle-wrapper';
-            wrapper.setAttribute('data-id', id); 
+    // --- ЛОГИКА МОДАЛЬНОГО ОКНА ---
+
+    addBtn.onclick = () => {
+        modal.classList.add('active');
+        titleInput.value = "";
+        titleInput.focus();
+    };
+
+    document.getElementById('cancel-doska').onclick = () => {
+        modal.classList.remove('active');
+    };
+
+    document.getElementById('confirm-doska').onclick = async () => {
+        const title = titleInput.value.trim();
+
+        const response = await fetch('/notes', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                title: title,
+                pageName: window.location.pathname
+            })
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            renderCircle(result.id, title);
+            modal.classList.remove('active'); // modal, потому что ты его так объявил выше
+        }
+    };
+
+    // --- ОТРИСОВКА КРУЖКА ---
+
+    function renderCircle(id, title = "") {
+        if (!container) return;
         
-            wrapper.innerHTML = `
+        const wrapper = document.createElement('div');
+        wrapper.className = 'circle-wrapper';
+        wrapper.setAttribute('data-id', id); 
+        
+        wrapper.innerHTML = `
+            <div class="circle-label">${title}</div>
             <div class="circle-icon"></div>
             <button class="delete-btn" disabled>x</button>
         `;
-            //Выбор кружка
-            wrapper.onclick = (event) => {
-            if (event.target.classList.contains('delete-btn')) return;
 
+        // Клик по кружку (выбор)
+        wrapper.onclick = (event) => {
+            if (event.target.classList.contains('delete-btn')) return;
             document.querySelectorAll('.circle-wrapper').forEach(w => w.classList.remove('active'));
             wrapper.classList.add('active');
-
-        openWorkspace(id);
-        
-        };
-    //--ОТКРЫТИЕ РАБОЧЕЙ ОБЛАСТИ КРУЖКА--//
-        function openWorkspace(id) {
-            const workspace = document.getElementById('workspace');
-            const container = document.getElementById('cikl-container');
-            const canvas = document.getElementById('holst');
-            const ctx = canvas.getContext('2d');
-            if (!workspace || !container || !canvas) return;
-
-            ciklContainer.style.display = 'block';
-            workspace.style.backgroundColor = '#f0f0f0';
-
-            // Сохранение данных предыдущего кружка перед переключением
-            if (currentId !== null) {
-                workspaceData[currentId] = {
-                    x: container.offsetLeft,
-                    y: container.offsetTop,
-                    zoom: scale,
-                    image: canvas.toDataURL()
-                }
-            }
-
-            currentId = id;
-
-            console.log(`рабочее пространство для ID: ${id}`);
-
-            // Загрузка данных или создание новых для выбранного кружка
-            const data = workspaceData[id] || {x: 0, y: 0, zoom: 1, image: null};
-
-            scale = data.zoom;
-            container.style.transform = `scale(${scale})`;
-            container.style.left = data.x + 'px';
-            container.style.top = data.y + 'px';
-
-            // Очистка и восстановление рисунка на холсте
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            if(data.image) {
-                const img = new Image();
-                img.src = data.image;
-                img.onload = () => ctx.drawImage(img, 0, 0);
-            }
-            console.log(`Рабочее пространство для ID: ${id}`);
-        }
-
-    //--ЛОГИКА ТАЙМЕРА КНОПКИ УДАЛЕНИЯ КРУЖКА--//
-            container.appendChild(wrapper);
-
-            const deleteBtn = wrapper.querySelector('.delete-btn');
-            let timer;
-
-            wrapper.onmouseenter = () => {
-            // Таймер на 1 секунду (как в твоем последнем коде)
-            timer = setTimeout(() => {
-                deleteBtn.disabled = false; 
-            }, 1000);
+            openWorkspace(id);
         };
 
-            wrapper.onmouseleave = () => {
+        // Логика кнопки удаления
+        const deleteBtn = wrapper.querySelector('.delete-btn');
+        let timer;
+
+        wrapper.onmouseenter = () => {
+            timer = setTimeout(() => { deleteBtn.disabled = false; }, 1000);
+        };
+
+        wrapper.onmouseleave = () => {
             clearTimeout(timer);
             deleteBtn.disabled = true; 
         };
 
-    //--ЛОГИКА УДАЛЕНИЯ КРУЖКА И ОЧИСТКИ ПАМЯТИ--//
         deleteBtn.onclick = async (event) => {
-            event.stopPropagation(); // Останавливаем клик, чтобы не открылся кружок перед удалением
-
+            event.stopPropagation();
             if (deleteBtn.disabled) return; 
 
             const response = await fetch(`/delete-note/${id}`, { method: 'DELETE' });
-    
             if (response.ok) {
-            delete workspaceData[id]; 
+                delete workspaceData[id]; 
+                if (currentId === id) {
+                    currentId = null; 
+                    ciklContainer.style.display = 'none'; 
+                    ctx.clearRect(0, 0, holst.width, holst.height); 
+                }
+                wrapper.remove();
+            }
+        };
 
-            if (currentId === id) {
-            currentId = null; 
-            const ciklContainer = document.getElementById('cikl-container');
-            const holst = document.getElementById('holst');
-            const ctx = holst.getContext('2d');
-            ciklContainer.style.display = 'none'; 
-            ctx.clearRect(0, 0, holst.width, holst.height); 
-            const workspace = document.getElementById('workspace');
+        container.appendChild(wrapper);
+    }
+
+    // --- РАБОЧАЯ ОБЛАСТЬ (ХОЛСТ) ---
+
+    function openWorkspace(id) {
+        if (!workspace || !ciklContainer || !holst) return;
+
+        ciklContainer.style.display = 'block';
+        workspace.style.backgroundColor = '#f0f0f0';
+
+        // Сохраняем старый рисунок перед переключением
+        if (currentId !== null) {
+            workspaceData[currentId] = {
+                ...workspaceData[currentId],
+                x: ciklContainer.offsetLeft,
+                y: ciklContainer.offsetTop,
+                zoom: scale,
+                image: holst.toDataURL()
+            };
         }
-            wrapper.remove();
-    }
-};
 
-            container.appendChild(wrapper);
+        currentId = id;
+        const data = workspaceData[id] || {x: 0, y: 0, zoom: 1, image: null};
+
+        scale = data.zoom;
+        ciklContainer.style.transform = `scale(${scale})`;
+        ciklContainer.style.left = data.x + 'px';
+        ciklContainer.style.top = data.y + 'px';
+
+        ctx.clearRect(0, 0, holst.width, holst.height);
+        if(data.image) {
+            const img = new Image();
+            img.src = data.image;
+            img.onload = () => ctx.drawImage(img, 0, 0);
+        }
     }
-   
-    //--ФУНКЦИЯ: ЗАГРУЗКА ВСЕХ КРУЖКОВ ИЗ БАЗЫ ДАННЫХ--//
+
+    // --- ЗАГРУЗКА ИЗ БАЗЫ ---
+
     async function loadFromDb() {
-            if (!container) return;
-            try {
+        try {
             const response = await fetch('/notes');
             const notes = await response.json();
             container.innerHTML = '';
@@ -131,85 +145,59 @@ document.addEventListener('DOMContentLoaded', () => {
 
             notes.forEach(note => {
                 if (note.pageName === currentPath) {
-                    renderCircle(note.id)
+                    renderCircle(note.id, note.title); // Передаем и ID, и Заголовок
+                }
+                if (note.image) {
+                    workspaceData[note.id] = { x: 0, y: 0, zoom: 1, image: note.image };
                 }
             });
-           } catch (err) {
-           console.error("Ошибка загрузки:", err);
+        } catch (err) {
+            console.error("Ошибка загрузки:", err);
         }
     }
 
-    //--ЛОГИКА ДОБАВЛЕНИЕ НОВОГО КРУЖКА Кнопка + --//
-            if (addBtn) {
-            addBtn.onclick = async () => {
-            const response = await fetch('/notes', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ 
-                    text: "circle",
-                    pageName: window.location.pathname })
-            });
-            if (response.ok) {
-                const result = await response.json();
-                renderCircle(result.id); 
+    // --- СОБЫТИЯ МЫШИ (РИСОВАНИЕ И ЗУМ) ---
+
+    workspace.addEventListener('wheel', (e) => {
+        if (currentId === null) return;
+        e.preventDefault();
+        const delta = e.deltaY > 0 ? -0.1 : 0.1;
+        scale = Math.min(Math.max(0.2, scale + delta), 3);
+        ciklContainer.style.transform = `scale(${scale})`;
+    }, { passive: false });
+
+    holst.addEventListener('mousedown', (e) => {
+        if (currentId === null) return;
+        isDrawing = true;
+        ctx.beginPath();
+        const rect = holst.getBoundingClientRect();
+        ctx.moveTo((e.clientX - rect.left) / scale, (e.clientY - rect.top) / scale);
+    });
+
+    window.addEventListener('mousemove', (e) => {
+        if (!isDrawing) return;
+        const rect = holst.getBoundingClientRect();
+        ctx.lineTo((e.clientX - rect.left) / scale, (e.clientY - rect.top) / scale);
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = 2 / scale;
+        ctx.stroke();
+    });
+
+    window.addEventListener('mouseup', () => {
+        if (isDrawing) {
+            isDrawing = false;
+            ctx.closePath();
+            if (currentId !== null) {
+                const imageData = holst.toDataURL();
+                workspaceData[currentId].image = imageData;
+                fetch(`/update-note-image/${currentId}`, {
+                    method: 'PUT',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ image: imageData })
+                });
             }
-        };
-    }
-
-
-//--ЛОГИКА КОЛЁСИКА--//
-
-workspace.addEventListener('wheel', (e) => {
-    if (currentId === null) return; // Если кружок не выбран — зум не работает
-    
-    e.preventDefault(); // Чтобы страница не дергалась вверх-вниз
-    
-    const delta = e.deltaY > 0 ? -0.1 : 0.1; // delta — Направление кручения
-    scale = Math.min(Math.max(0.2, scale + delta), 3); // Ограничиваем масштаб от 0.2 до 3
-
-    const ciklContainer = document.getElementById('cikl-container');
-    ciklContainer.style.transform = `scale(${scale})`; // Применяем зум
-}, { passive: false });
-
-//--ЛОГИКА РИСОВАТЬ--//
-
-holst.addEventListener('mousedown', (e) => {
-    isDrawing = true; // isDrawing — Начинаем рисовать
-    ctx.beginPath(); // beginPath — Начинаем новую линию
-    const rect = holst.getBoundingClientRect(); // Получаем координаты холста
-    
-    // moveTo — Ставим точку начала
-    ctx.moveTo(
-        (e.clientX - rect.left) / scale, 
-        (e.clientY - rect.top) / scale
-    );
-});
-
-
-window.addEventListener('mousemove', (e) => {
-    if (!isDrawing) return; // if (!isDrawing) — Если кнопка НЕ зажата, выходим
-
-    const rect = holst.getBoundingClientRect();
-
-    ctx.lineTo(
-        (e.clientX - rect.left) / scale, 
-        (e.clientY - rect.top) / scale
-    );
-    
-    ctx.strokeStyle = '#000000'; // Черный цвет
-    ctx.lineWidth = 2 / scale;   // Тонкая линия
-    ctx.stroke();                // Наносим на холст
-});
-
-
-window.addEventListener('mouseup', () => {
-    if (isDrawing) {
-        isDrawing = false; // isDrawing — Выключаем режим рисования
-        ctx.closePath();   // Завершаем линию
-    }
-});
-    
-
+        }
+    });
 
     loadFromDb(); 
 });
