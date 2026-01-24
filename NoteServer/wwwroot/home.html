@@ -54,9 +54,19 @@
 <!--Панель кружков-->
 <div id="add-doska" class="doska-overlay">
     <div class="doska-content">
-        <h3>Новый кружок</h3>
-        <input type="text" id="note-title" placeholder="Веддите название..." maxlength="15">
-        <div id="doska-extra-fields">
+        
+        <div class="doska-form-row">
+            
+            <div class="title-group">
+                <label>Введите название</label>
+                <input type="text" id="note-title" placeholder="Назовите кружок..." maxlength="15">
+            </div>
+
+            <div class="color-group">
+                <label>Цвет</label>
+                <input type="color" id="note-color" value="#ffffff">
+            </div>
+
         </div>
 
         <div class="doska-buttons">

@@ -75,6 +75,8 @@ public class Note
     public string Text { get; set; } = "";
     public string pageName { get; set; } = "";
     public string? Image { get; set; }
+    public string Color { get; set; } = "#ffffff";
+
 }
 
 public class AppDbContext : DbContext
